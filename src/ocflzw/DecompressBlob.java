@@ -25,6 +25,10 @@ public class DecompressBlob {
     }
     
     private static final int MAX_CODES = 8192;
+    private static int[] tempDecompressBuffer = new int[MAX_CODES];
+    private static LzwItem[] lzwLookupTable = new LzwItem[MAX_CODES];
+    private static byte[] finalByteBuffer = null;
+    
     private static int codeCount = 257;
     private static int shift = 1;
     private static int currentShift = 1;
@@ -35,10 +39,6 @@ public class DecompressBlob {
     private static int tempBufferIndex = 0;
     private static int currentByteBufferIndex = 0;
     private static int byteArrayIndex = 0;
-    
-    private static int[] tempDecompressBuffer = new int[MAX_CODES];
-    private static LzwItem[] lzwLookupTable = new LzwItem[MAX_CODES];
-    private static byte[] finalByteBuffer = null;
 
     public static byte[] decompress(byte[] rawbytes) {
         finalByteBuffer = new byte[rawbytes.length * 4];
