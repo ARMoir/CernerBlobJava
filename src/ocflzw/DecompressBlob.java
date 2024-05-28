@@ -19,17 +19,11 @@ public class DecompressBlob {
     
     public static String getCharacterEncoding(byte[] byte_array)
     { 
-    	// Creating an object of InputStream
-        InputStream instream
-            = new ByteArrayInputStream(byte_array);
-        
-        // Now, opening new file input stream reader
-        InputStreamReader streamreader
-            = new InputStreamReader(instream);
-        String defaultCharset = streamreader.getEncoding();
-        
-        // Returning default character encoding
-        return defaultCharset;
+        InputStream instream = new ByteArrayInputStream(byte_array);       
+        InputStreamReader streamreader = new InputStreamReader(instream);
+        String charSet = streamreader.getEncoding();
+
+        return charSet;
     }
 
     private static class LzwItem {
