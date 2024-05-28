@@ -19,8 +19,7 @@ public class DecompressBlob {
     private static String blobString(byte[] contents) throws UnsupportedEncodingException{ 
     	byte[] out = decompress(contents);
         String charSet = getCharacterEncoding(out);
-        String output = new String(out, charSet);
-        
+        String output = new String(out, charSet);        
         return output;  	
     }
     
@@ -28,7 +27,6 @@ public class DecompressBlob {
         InputStream instream = new ByteArrayInputStream(byte_array);       
         InputStreamReader streamreader = new InputStreamReader(instream);
         String charSet = streamreader.getEncoding();
-
         return charSet;
     }
 
