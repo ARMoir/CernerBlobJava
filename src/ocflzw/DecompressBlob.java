@@ -3,15 +3,34 @@ package ocflzw;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class DecompressBlob {
 
     public static void main(String[] args) throws IOException {
         byte[] contents = Files.readAllBytes(Paths.get("C://Sites//BLOB//blob//B10"));;
         byte[] out = decompress(contents);
-        String output = new String(out, StandardCharsets.UTF_8);
+        String outCharset = getCharacterEncoding(out);
+        String output = new String(out, outCharset);
         System.out.println(output);
+    }
+    
+    public static String getCharacterEncoding(byte[] byte_array)
+    {
+ 
+        // Creating an object of InputStream
+        InputStream instream
+            = new ByteArrayInputStream(byte_array);
+ 
+        // Now, opening new file input stream reader
+        InputStreamReader streamreader
+            = new InputStreamReader(instream);
+        String defaultCharset = streamreader.getEncoding();
+ 
+        // Returning default character encoding
+        return defaultCharset;
     }
 
     private static class LzwItem {
