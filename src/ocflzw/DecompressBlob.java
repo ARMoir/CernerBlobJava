@@ -6,19 +6,25 @@ import java.io.IOException;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 public class DecompressBlob {
 
     public static void main(String[] args) throws IOException {
         byte[] contents = Files.readAllBytes(Paths.get("C://Sites//BLOB//blob//B10"));
-        byte[] out = decompress(contents);
-        String charSet = getCharacterEncoding(out);
-        String output = new String(out, charSet);
+        String output = blobString(contents);
         System.out.println(output);
     }
     
-    public static String getCharacterEncoding(byte[] byte_array)
-    { 
+    private static String blobString(byte[] contents) throws UnsupportedEncodingException{ 
+    	byte[] out = decompress(contents);
+        String charSet = getCharacterEncoding(out);
+        String output = new String(out, charSet);
+        
+        return output;  	
+    }
+    
+    private static String getCharacterEncoding(byte[] byte_array){ 
         InputStream instream = new ByteArrayInputStream(byte_array);       
         InputStreamReader streamreader = new InputStreamReader(instream);
         String charSet = streamreader.getEncoding();
